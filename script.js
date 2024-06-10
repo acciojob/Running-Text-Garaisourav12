@@ -4,7 +4,7 @@ const originalText = 'We love Programming!';
 let currentIndex = 0;
 
 // Set initial text content
-text.innerHTML = "";
+text.innerHTML = "W";
 
 function typeNextCharacter() {
   if (currentIndex < originalText.length) {
