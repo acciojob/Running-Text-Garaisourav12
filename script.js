@@ -1,29 +1,21 @@
-//your JS code here. If required.
-const textElement = document.getElementById("text");
-const speedInput = document.getElementById("speed");
-const startButton = document.getElementById("startButton");
+const text = document.getElementById("text");
+const speed = document.getElementById("speed");
 
-let intervalId;
+let str = text.innerText;
+let n = str.length;
+let end = 0;
+let timeGap = 700;
 
-startButton.addEventListener("click", function () {
-    clearInterval(intervalId);
+const startTyping = () => {
+  return setInterval(() => {
+    text.innerText = str.slice(0, end);
+    end = (end + 1) % (n + 1);
+  }, timeGap - Number(speed.value) * 50);
+};
 
-    const speed = parseInt(speedInput.value);
-    const text = textElement.innerText;
-    textElement.innerText = ''
-    if (speed >= 1 && speed <= 10) {
-        const delay = 500 / speed;
-        let i = 0;
+let timerId = startTyping();
 
-        intervalId = setInterval(function () {
-            if (i < text.length) {
-                textElement.textContent += text[i];
-                i++;
-            } else {
-                clearInterval(intervalId);
-            }
-        }, delay);
-    } else {
-        alert("Please enter a speed between 1 and 10.");
-    }
+speed.addEventListener("input", () => {
+  clearInterval(timerId);
+  let timerId = startTyping();
 });
