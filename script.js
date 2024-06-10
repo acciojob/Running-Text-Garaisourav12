@@ -1,21 +1,26 @@
-const text = document.getElementById("text");
-const speed = document.getElementById("speed");
+//your JS code here. If required.
+const text = document.getElementById('text');
+      const speedInput = document.getElementById('speed');
+      const originalText = 'We love Programming!';
+      let currentIndex = 0;
 
-let str = text.innerText;
-let n = str.length;
-let end = 0;
-let timeGap = 700;
+      function typeNextCharacter() {
+        if (currentIndex < originalText.length) {
+          const currentCharacter = originalText.charAt(currentIndex);
+          text.innerHTML += currentCharacter;
+          currentIndex++;
+          setTimeout(typeNextCharacter, 500 / parseInt(speedInput.value));
+        }
+      }
 
-const startTyping = () => {
-  return setInterval(() => {
-    text.innerText = str.slice(0, end);
-    end = (end + 1) % (n + 1);
-  }, timeGap - Number(speed.value) * 50);
-};
+      speedInput.addEventListener('input', () => {
+        // Reset the text and index when the speed changes
+        text.innerHTML = '';
+        currentIndex = 0;
+        // Start typing again with the new speed
+        typeNextCharacter();
+      });
 
-let timerId = startTyping();
-
-speed.addEventListener("input", () => {
-  clearInterval(timerId);
-  let timerId = startTyping();
-});
+      // Start typing the text with the initial speed
+      typeNextCharacter();
+   
