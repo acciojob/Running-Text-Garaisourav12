@@ -1,7 +1,7 @@
 const text = document.getElementById('text');
 const speedInput = document.getElementById('speed');
 const originalText = 'We love Programming!';
-let currentIndex = 0;
+let currentIndex = 1;
 
 // Set initial text content
 text.innerHTML = "W";
